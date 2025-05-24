@@ -1,3 +1,4 @@
+
 local Release = "Release"
 local Luna = { Folder = "Luna", Options = {}, ThemeGradient = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(117, 164, 206)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(123, 201, 201)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(224, 138, 175))} }
 local UserInputService = game:GetService("UserInputService")
@@ -10,6 +11,11 @@ local Player = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 local CoreGui = game:GetService("CoreGui")
 local isStudio
+for i,v in (game.CoreGui.RobloxGui:GetChildren()) do
+ if string.lower(v.Name) == "luna-old" then
+  v:Destroy()
+ end
+end
 if RunService:IsStudio() then
 	isStudio = true
 end
@@ -2005,7 +2011,7 @@ local function Minimize(Window)
 end
 function Luna:CreateWindow(WindowSettings)
 	WindowSettings = Kwargify({
-		Name = "Luna UI Example Window",
+		Name = "Window",
 		Subtitle = "",
 		LogoID = "",
 		LoadingEnabled = true,
@@ -2257,6 +2263,8 @@ function Luna:CreateWindow(WindowSettings)
 		for i,v in pairs(HomeTabSettings.SupportedExecutors) do
 			if isStudio then HomeTabPage.detailsholder.dashboard.Client.Subtitle.Text = "Luna Interface Suite - Debugging Mode" break end
 			if v == (identifyexecutor() or getexecutorname()) then
+				HomeTabPage.detailsholder.dashboard.Client.UIGradient.Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)), ColorSequenceKeypoint.new(1, Color3.new(0.38392, 1, 0.48519, 0 )) })
+				HomeTabPage.detailsholder.dashboard.Client.UIStroke:WaitForChild("UIGradient").Color = ColorSequence.new({ColorSequenceKeypoint.new(0, Color3.new(0, 0, 0)),ColorSequenceKeypoint.new(1, Color3.new(0, 1, 0.109)) })
 				HomeTabPage.detailsholder.dashboard.Client.Subtitle.Text = "Your Executor Supports This Script."
 			else
 				HomeTabPage.detailsholder.dashboard.Client.Subtitle.Text = "Your Executor Isn't Officialy Supported By This Script."
