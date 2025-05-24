@@ -1,4 +1,4 @@
-local Release = "Prerelease Beta 6.1"
+local Release = "Release"
 local Luna = { Folder = "Luna", Options = {}, ThemeGradient = ColorSequence.new{ColorSequenceKeypoint.new(0.00, Color3.fromRGB(117, 164, 206)), ColorSequenceKeypoint.new(0.50, Color3.fromRGB(123, 201, 201)), ColorSequenceKeypoint.new(1.00, Color3.fromRGB(224, 138, 175))} }
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -10,7 +10,6 @@ local Player = Players.LocalPlayer
 local Camera = workspace.CurrentCamera
 local CoreGui = game:GetService("CoreGui")
 local isStudio
-local website = "github.com/Nebula-Softworks"
 if RunService:IsStudio() then
 	isStudio = true
 end
@@ -1790,10 +1789,10 @@ local function Hide(Window, bind, notif)
 			TweenService:Create(tabbtn.UIStroke, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
 		end
 	end
-	task.wait(0.28)
+	wait(0.28)
 	Window.Size = UDim2.new(0,0,0,0)
 	Window.Parent.ShadowHolder.Visible = false
-	task.wait()
+	wait()
 	Window.Elements.Parent.Visible = false
 	Window.Visible = false
 end
@@ -1895,7 +1894,7 @@ local function Draggable(Bar, Window, enableTaptic, tapticOffset)
 	end)
 end
 function Luna:Notification(data) 
-	task.spawn(function()
+	spawn(function()
 		data = Kwargify({
 			Title = "Missing Title",
 			Content = "Missing or Unknown Content",
@@ -1918,7 +1917,7 @@ function Luna:Notification(data)
 		newNotification.Shadow.ImageTransparency = 1
 		newNotification.Icon.ImageTransparency = 1
 		newNotification.Icon.BackgroundTransparency = 1
-		task.wait()
+		wait()
 		newNotification.Size = UDim2.new(1, 0, 0, -Notifications:FindFirstChild("UIListLayout").Padding.Offset)
 		newNotification.Icon.Size = UDim2.new(0, 28, 0, 28)
 		newNotification.Icon.Position = UDim2.new(0, 16, 0.5, -1)
@@ -1928,17 +1927,17 @@ function Luna:Notification(data)
 		newNotification.Description.Size = UDim2.new(1,-65,0, bounds - 35)
 		newNotification.Size = UDim2.new(1, 0, 0, -Notifications:FindFirstChild("UIListLayout").Padding.Offset)
 		TweenService:Create(newNotification, TweenInfo.new(0.6, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, 0, 0, bounds)}):Play()
-		task.wait(0.15)
+		wait(0.15)
 		TweenService:Create(newNotification, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundTransparency = 0.45}):Play()
 		TweenService:Create(newNotification.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
-		task.wait(0.05)
+		wait(0.05)
 		TweenService:Create(newNotification.Icon, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
-		task.wait(0.05)
+		wait(0.05)
 		TweenService:Create(newNotification.Description, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 0.35}):Play()
 		TweenService:Create(newNotification.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {Transparency = 0.95}):Play()
 		TweenService:Create(newNotification.Shadow, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 0.82}):Play()
 		local waitDuration = math.min(math.max((#newNotification.Description.Text * 0.1) + 2.5, 3), 10)
-		task.wait(data.Duration or waitDuration)
+		wait(data.Duration or waitDuration)
 		newNotification.Icon.Visible = false
 		TweenService:Create(newNotification, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {BackgroundTransparency = 1}):Play()
 		TweenService:Create(newNotification.UIStroke, TweenInfo.new(0.4, Enum.EasingStyle.Exponential), {Transparency = 1}):Play()
@@ -1946,7 +1945,7 @@ function Luna:Notification(data)
 		TweenService:Create(newNotification.Title, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 		TweenService:Create(newNotification.Description, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 		TweenService:Create(newNotification, TweenInfo.new(1, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -90, 0, 0)}):Play()
-		task.wait(1)
+		wait(1)
 		TweenService:Create(newNotification, TweenInfo.new(1, Enum.EasingStyle.Exponential), {Size = UDim2.new(1, -90, 0, -Notifications:FindFirstChild("UIListLayout").Padding.Offset)}):Play()
 		newNotification.Visible = false
 		newNotification:Destroy()
@@ -1956,7 +1955,7 @@ local function Unhide(Window, currentTab)
 	Window.Size = SizeBleh
 	Window.Elements.Visible = true
 	Window.Visible = true
-	task.wait()
+	wait()
 	tween(Window, {BackgroundTransparency = 0.2})
 	tween(Window.Elements, {BackgroundTransparency = 0.08})
 	tween(Window.Line, {BackgroundTransparency = 0})
@@ -2008,10 +2007,10 @@ function Luna:CreateWindow(WindowSettings)
 	WindowSettings = Kwargify({
 		Name = "Luna UI Example Window",
 		Subtitle = "",
-		LogoID = "6031097225",
+		LogoID = "",
 		LoadingEnabled = true,
 		LoadingTitle = "Luna Interface Suite",
-		LoadingSubtitle = "by Nebula Softworks",
+		LoadingSubtitle = "",
 		ConfigSettings = {},
 		KeySystem = false,
 		KeySettings = {}
@@ -2153,7 +2152,7 @@ function Luna:CreateWindow(WindowSettings)
 						end
 					end
 					tween(KeySystem, {BackgroundTransparency = 1}, nil,TweenInfo.new(0.6, Enum.EasingStyle.Exponential))
-					task.wait(0.51)
+					wait(0.51)
 					Passthrough = true
 					KeySystem.Visible = false
 					if WindowSettings.KeySettings.SaveKey then
@@ -2169,7 +2168,7 @@ function Luna:CreateWindow(WindowSettings)
 					end
 					KeySystem.Input.InputBox.Text = "Incorrect Key"
 					AttemptsRemaining = AttemptsRemaining - 1
-					task.wait(0.4)
+					wait(0.4)
 					KeySystem.Input.InputBox.Text = ""
 				end
 			end)
@@ -2179,21 +2178,21 @@ function Luna:CreateWindow(WindowSettings)
 		end
 	end
 	if WindowSettings.KeySystem then
-		repeat task.wait() until Passthrough
+		repeat wait() until Passthrough
 	end
 	if WindowSettings.LoadingEnabled then
-		task.wait(0.3)
+		wait(0.3)
 		TweenService:Create(LoadingFrame.Frame.Frame.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 		TweenService:Create(LoadingFrame.Frame.ImageLabel, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 0}):Play()
-		task.wait(0.05)
+		wait(0.05)
 		TweenService:Create(LoadingFrame.Frame.Frame.Subtitle, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
 		TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 0}):Play()
-		task.wait(0.29)
+		wait(0.29)
 		TweenService:Create(LoadingFrame.Frame.ImageLabel, TweenInfo.new(1.7, Enum.EasingStyle.Back, Enum.EasingDirection.Out, 2, false, 0.2), {Rotation = 450}):Play()
-		task.wait(3.32)
+		wait(3.32)
 		TweenService:Create(LoadingFrame.Frame.Frame.Title, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 		TweenService:Create(LoadingFrame.Frame.ImageLabel, TweenInfo.new(0.3, Enum.EasingStyle.Exponential), {ImageTransparency = 1}):Play()
-		task.wait(0.05)
+		wait(0.05)
 		TweenService:Create(LoadingFrame.Frame.Frame.Subtitle, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 		TweenService:Create(LoadingFrame.Version, TweenInfo.new(0.7, Enum.EasingStyle.Exponential), {TextTransparency = 1}):Play()
 		wait(0.3)
@@ -2236,7 +2235,7 @@ function Luna:CreateWindow(WindowSettings)
 			tween(HomeTabButton, {BackgroundTransparency = 0})
 			tween(HomeTabButton.UIStroke, {Transparency = 0.41})
 			Elements.UIPageLayout:JumpTo(HomeTabPage)
-			task.wait(0.05)
+			wait(0.05)
 			for _, OtherTabButton in ipairs(Navigation.Tabs:GetChildren()) do
 				if OtherTabButton.Name ~= "InActive Template" and OtherTabButton.ClassName == "Frame" and OtherTabButton ~= HomeTabButton then
 					tween(OtherTabButton.ImageLabel, {ImageColor3 = Color3.fromRGB(221,221,221)})
@@ -2329,7 +2328,7 @@ function Luna:CreateWindow(WindowSettings)
 			return format(Hours)..":"..format(Minutes)..":"..format(Seconds)
 		end
 		coroutine.wrap(function()
-			while task.wait() do
+			while wait() do
 				HomeTabPage.detailsholder.dashboard.Server.Players.Value.Text = #Players:GetPlayers().." playing"
 				HomeTabPage.detailsholder.dashboard.Server.MaxPlayers.Value.Text = Players.MaxPlayers.." players can join this server"
 				HomeTabPage.detailsholder.dashboard.Server.Latency.Value.Text = isStudio and tostring(math.round((Players.LocalPlayer:GetNetworkPing() * 2 ) / 0.01)) .."ms" or tostring(math.floor(getPing()) .."ms")
@@ -2374,7 +2373,7 @@ function Luna:CreateWindow(WindowSettings)
 			tween(TabButton, {BackgroundTransparency = 0})
 			tween(TabButton.UIStroke, {Transparency = 0.41})
 			Elements.UIPageLayout:JumpTo(TabPage)
-			task.wait(0.05)
+			wait(0.05)
 			for _, OtherTabButton in ipairs(Navigation.Tabs:GetChildren()) do
 				if OtherTabButton.Name ~= "InActive Template" and OtherTabButton.ClassName == "Frame" and OtherTabButton ~= TabButton then
 					tween(OtherTabButton.ImageLabel, {ImageColor3 = Color3.fromRGB(221,221,221)})
@@ -2387,7 +2386,7 @@ function Luna:CreateWindow(WindowSettings)
 		if FirstTab then
 			Tab:Activate()
 		end
-		task.wait(0.01)
+		wait(0.01)
 		TabButton.Interact.MouseButton1Click:Connect(function()
 			Tab:Activate()
 		end)
@@ -5463,7 +5462,7 @@ function Luna:CreateWindow(WindowSettings)
 				Name = "Color 3",
 				Color = Color3.fromRGB(224, 138, 184),
 			}, "LunaInterfaceSuitePrebuiltCPC3") 
-			task.wait(1)
+			wait(1)
 			c1cp:Set({
 				Callback = function(Value)
 					if c2cp and c3cp then
@@ -5555,7 +5554,7 @@ function Luna:CreateWindow(WindowSettings)
 			if not success then return false, "Unable to decode JSON data." end
 			for _, option in next, decoded.objects do
 				if ClassParser[option.type] then
-					task.spawn(function() 
+					spawn(function() 
 						ClassParser[option.type].Load(option.flag, option) 
 					end)
 				end
